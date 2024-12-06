@@ -1,0 +1,465 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+
+<title>The_Story_of_the_Internet</title>
+
+    <link rel="stylesheet" href="https://api.fontshare.com/css?f[]=satoshi@1,300,301,700&f[]=clash-grotesk@1,200,201,600&f[]=quicksand@1,500,600,700&display=swap">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Satoshi', sans-serif;
+      }
+
+      body {
+        font-family: 'Satoshi', sans-serif;
+        user-select: none;
+        overflow-x: hidden;
+        background-color: #fbfbf0;
+        color: #2f2f2f;
+        transition: background-color 0.5s, color 0.5s;
+        width:100%;
+      }
+      main {
+        padding:0 2rem;
+      }
+      .dark-mode {
+        background-color: #2f2f2f;
+        color: #f6f6dc;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        z-index:12;
+        position: -webkit-sticky;
+        position: sticky;
+        top:1rem;
+      }
+
+      .top-bar a {
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        margin-right: 1rem;
+      }
+
+      .top-bar button {
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border: none;
+        background-color: #2f2f2f;
+        color: #f6f6dc;
+        border-radius: 4px;
+      }
+
+      .header {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .header h1 {
+        font-family: 'Clash Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 60px;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav-bar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
+
+      .nav-bar li {
+        margin: 0 1rem;
+      }
+
+      .nav-bar a {
+        font-weight: 300;
+        text-decoration: none;
+        color: inherit;
+        font-size: 1.25rem;
+      }
+      .title-section, .subtitle-section {
+        position: relative;
+      }
+      .main-section {
+        padding:  2rem;
+        padding-top:10rem;
+        text-align: center;
+        height:100vh;
+        min-height:100vh;
+        /*
+        */
+      }
+
+      .main-section h2 {
+        font-family: 'Clash Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .main-section p {
+        font-weight: 300;
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .swiper-container {
+        width: 100%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .swiper-slide {
+        background-size: cover;
+        background-position: center;
+        & img {
+          width:100%;
+        }
+      }
+
+      .team {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 2rem 1rem;
+      }
+
+      .team-member {
+        flex: 1 1 200px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 2rem 1rem;
+        border-top: 1px solid ;
+        border-color:#2f2f2f;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        position:relative;
+      }
+
+      footer div {
+        flex: 1 1 1 200px;
+        margin-bottom: 1rem;
+      }
+
+      footer h2 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      footer li {
+        margin-bottom: 0.5rem;
+      }
+
+      footer a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+
+      .dark-mode .top-bar button {
+        background-color: #444;
+      }
+
+      @media (max-width: 767px) {
+        .hamburger {
+          display: block;
+        }
+
+        .nav-bar {
+          display: none;
+        }
+
+        .menu-toggle:checked+.nav-bar {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .header h1 {
+          font-size: 40px;
+        }
+      }
+
+      .toggle-button-cover {
+        display: table-cell;
+        position: relative;
+        box-sizing: border-box;
+        transform:scale(0.45);
+        transform-origin:center right;
+      }
+
+      .button-cover {
+        height: 100px;
+        margin: 20px;
+        background-color: #fff;
+        box-shadow: 0 10px 20px -8px #c5d6d6;
+        border-radius: 4px;
+      }
+
+      .button-cover:before {
+        counter-increment: button-counter;
+        content: counter(button-counter);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        color: #d7e3e3;
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px;
+      }
+
+      .button-cover,
+      .knobs,
+      .layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      .button {
+        position: relative;
+        top: 50%;
+        width: 74px;
+        height: 36px;
+        margin: -20px auto 0 auto;
+        overflow: hidden;
+      }
+
+      .button.r,
+      .button.r .layer {
+        border-radius: 100px;
+      }
+
+      .button.b2 {
+        border-radius: 2px;
+      }
+
+      .checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 3;
+      }
+
+      .knobs {
+        z-index: 2;
+      }
+
+      .layer {
+        width: 100%;
+        background-color: #f6f6dc;
+        transition: 0.3s ease all;
+        z-index: 1;
+      }
+      #toggle-button .knobs:before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 20px;
+        height: 10px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+        padding: 9px 4px;
+        background-color: #2f2f2f;
+        border-radius: 50%;
+        transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+      }
+
+      #toggle-button .checkbox:active + .knobs:before {
+        width: 46px;
+        border-radius: 100px;
+      }
+
+      #toggle-button .checkbox:checked:active + .knobs:before {
+        margin-left: -26px;
+      }
+
+      #toggle-button .checkbox:checked + .knobs:before {
+        content: "";
+        left: 42px;
+        background-color: #2f2f2f;
+      }
+
+      #toggle-button .checkbox:checked ~ .layer {
+        background-color: #fcebeb;
+      }
+    </style>
+  </head>
+  <body>
+
+    <main data-scroll-container class="content" id="top">
+
+      <div class="top-bar">        
+
+        <div>
+          <a class="go" href="#top">360°</a>
+        </div>
+
+        <div id="dark-mode-toggle" class="toggle-button-cover">
+          <div class="button r" id="toggle-button">
+            <input type="checkbox" class="checkbox" />
+            <div class="knobs"></div>
+            <div class="layer"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="header" data-scroll-section>
+
+        <header><h1>The Story of the Internet</h1></header>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+        <nav class="nav-bar">
+          <ul>
+            <li><a href="#home" data-scroll>Home</a></li>
+            <li><a href="#about" data-scroll>About</a></li>
+            <li><a href="#Resume" data-scroll>Resume</a></li>
+            <li><a href="#team" data-scroll>Team</a></li>
+      
+          </ul>
+        </nav>
+      </div>
+      <section id="home" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Welcome to Our Website</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">We, the Team 1, created an Website for the book called "The Story of the Internet" for the Tech English subject given by professor Filipe Carvalho.</p>
+        
+        <div class="team">
+        <div class="team-member" data-scroll data-scroll-speed="2">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQE0aBVG9FsuGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1729159768408?e=1738195200&v=beta&t=-JtP-AkBXjxGxqUsXFiW1R8arjxJbaw_NXLBmfZBLiY" alt="Team Member">
+            <h3>Filipe Carvalho</h3>
+            <p>The Teacher</p>
+        </div>
+</section>
+      </section>
+
+      <section id="about" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">About The Book</h2>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">is a book that explores the fascinating evolution of the internet, from its beginnings as a military project to its transformation into one of the most revolutionary global communication tools. The work covers important milestones, such as the creation of ARPANET, the development of the World Wide Web by Tim Berners-Lee, and the impact of social networks, applications and mobile technologies.</p>
+        <div class="book-frame">
+  <div class="book-cover">
+    <img src="data:image/jpeg;base64,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" alt="Book Cover">
+  </div>
+  <div class="book-info">
+    <h3>The Story of the Internet</h3>
+    <p><strong>Author:</strong> Stephen Bryant</p>
+    <p><strong>Genre:</strong> Technology, History</p>
+    </p>
+  </div>
+</div>
+
+      </section>
+        <section id="Resume" class="main-section" data-scroll-section>
+        <h2 class="title-section" data-scroll data-scroll-speed="1">Resume</h2>
+          <p class="subtitle-section" data-scroll data-scroll-speed="2">A brief summary about the book</p>
+        <p class="subtitle-section" data-scroll data-scroll-speed="2">The Story of the Internet by Stephen Bryant offers a thorough exploration of the development and impact of the internet. The book tracks the evolution of the internet from its beginnings as ARPANET, a research project designed to facilitate communication among military and academic institutions in the 1960s. It was not initially envisioned for public use, but Bryant details how the internet gradually expanded into a tool for global communication.
+
+The narrative progresses to the 1980s, when key technologies like TCP/IP and the rise of personal computers began to change the landscape of the internet. Bryant covers the pivotal moment in 1991, when Tim Berners-Lee introduced the World Wide Web, making it accessible to everyone, not just a select group of scientists. This was the spark that led to the internet’s massive growth throughout the 1990s, transforming into a space for business, education, and social interaction.
+
+Bryant also delves into the dot-com boom and bust in the late 1990s, the development of e-commerce platforms, and the rapid growth of digital media, especially social networks like Facebook and Twitter. These platforms redefined how people interacted online, giving rise to the "social web" and fundamentally changing communication, marketing, and entertainment.
+
+Throughout the book, Bryant addresses various challenges the internet faces, such as privacy issues, the digital divide, cybersecurity threats, and the increasing dominance of tech companies. He also examines the impact of these challenges on society, with a focus on issues like online harassment, data privacy, and misinformation.
+
+The final chapters speculate on the future of the internet, considering innovations like the Internet of Things (IoT), cloud computing, and artificial intelligence. Bryant emphasizes the continuing role of the internet in shaping modern life, from work to politics to daily interactions.
+
+In essence, The Story of the Internet provides a comprehensive overview of how the internet grew from a niche, academic network into an essential global infrastructure, influencing every aspect of life.</p>
+      
+      
+      
+      </section>
+
+      <section id="team" class="main-section" data-scroll-section>
+    <h2 class="title-section" data-scroll data-scroll-speed="1">Our Team</h2>
+    <p class="subtitle-section" data-scroll data-scroll-speed="2">Forever Young</p>
+
+    <div class="team">
+        <div class="team-member" data-scroll data-scroll-speed="2">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198344.png" alt="Team Member">
+            <h3>Robson Barreto</h3>
+            <p>Project Manager</p>
+        </div>
+
+        <div class="team-member" data-scroll data-scroll-speed="3">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198344.png" alt="Team Member">
+            <h3>Jhonata Teles</h3>
+            <p>Front-End</p>
+        </div>
+
+        <div class="team-member" data-scroll data-scroll-speed="3">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQG0FkLL_U3uDw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1730134695851?e=1738195200&v=beta&t=paqbxUOcD94xSREOE9Kv9tNj_NfkLQ6aXNbcC3RwnLk" alt="Team Member">
+            <h3>Luan Ventura</h3>
+            <p>Back-End</p>
+        </div>
+
+        <div class="team-member" data-scroll data-scroll-speed="3">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198344.png" alt="Team Member">
+            <h3>Arthur Cezar</h3>
+            <p>Designer</p>
+        </div>
+    </div> <div class="team-member" data-scroll data-scroll-speed="3">
+            <img src="https://cdn-icons-png.flaticon.com/512/1198/1198344.png" alt="Team Member">
+            <h3>Danilo Barros</h3>
+            <p>Full stack Developer</p>
+        </div>
+        
+</section>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+  </body>
+</html>
+  
+  
